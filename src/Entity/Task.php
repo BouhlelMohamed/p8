@@ -28,7 +28,7 @@ class Task
     private $content;
 
     /**
-     * @ORM\Column(type="boolean",default="0")
+     * @ORM\Column(type="boolean")
      */
     private $isDone;
 
