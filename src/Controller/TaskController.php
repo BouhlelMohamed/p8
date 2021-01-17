@@ -20,6 +20,22 @@ class TaskController extends AbstractController
     }
 
     /**
+     * @Route("/tasks/todo", name="task_list_todo")
+     */
+    public function taskToDo()
+    {
+        return $this->render('task/todo.html.twig', ['tasks' => $this->getDoctrine()->getRepository('App:Task')->findAll()]);
+    }
+
+    /**
+     * @Route("/tasks/close", name="task_list_close")
+     */
+    public function taskClose()
+    {
+        return $this->render('task/close.html.twig', ['tasks' => $this->getDoctrine()->getRepository('App:Task')->findAll()]);
+    }
+
+    /**
      * @Route("/tasks/create", name="task_create")
      */
     public function createAction(Request $request,UserRepository $userRepository)
@@ -36,6 +52,7 @@ class TaskController extends AbstractController
             {
                 $task->setUser($userRepository->findOneByUsername('anonyme'));
             }
+            $task->setCreatedAt(new \DateTimeImmutable());
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($task);
@@ -77,7 +94,7 @@ class TaskController extends AbstractController
      */
     public function toggleTaskAction(Task $task)
     {
-        $task->toggle(!$task->isDone());
+        $task->setIsDone(!$task->getIsDone());
         $this->getDoctrine()->getManager()->flush();
 
         $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));

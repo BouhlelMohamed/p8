@@ -40,7 +40,7 @@ class Task
     private $createdAt;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tasks")
      */
     private $user;
 
