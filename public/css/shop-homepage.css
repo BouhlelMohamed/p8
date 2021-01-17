@@ -4,8 +4,24 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
-body {
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+.nav-link-color > a {
+    color: darkslategrey;
+}
+
+.task-list {
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-homepage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.navbar-homepage-item {
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }
 
 .slide-image {
