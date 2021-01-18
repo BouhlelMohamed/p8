@@ -32,6 +32,7 @@
 
             <img src="{{ asset('img/Logo_OpenClassrooms.png') }}" alt="OpenClassrooms" />
         </div>
+        {% if app.user %}
         <div class="navbar-homepage-item">
             <form class="form-inline nav-link-color">
                 <a href="{{ path('homepage') }}">Accueil  </a>
@@ -44,6 +45,7 @@
                 {% endif %}
             </form>
         </div>
+        {% endif %}
     </div>
 </nav>
 
