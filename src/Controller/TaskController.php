@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Form\TaskType;
+use App\Repository\UserRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +22,7 @@ class TaskController extends AbstractController
     /**
      * @Route("/tasks/create", name="task_create")
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request,UserRepository $userRepository)
     {
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
@@ -29,6 +30,13 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $task->setUser($this->getUser());
+            if(!$this->getUser())
+            {
+                $task->setUser($userRepository->findOneByUsername('anonyme'));
+            }
+            $task->setCreatedAt(new \DateTimeImmutable());
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($task);
@@ -68,13 +76,17 @@ class TaskController extends AbstractController
     /**
      * @Route("/tasks/{id}/toggle", name="task_toggle")
      */
-    public function toggleTaskAction(Task $task)
+    public function toggleTaskAction(Task $task,Request $request)
     {
-        $task->toggle(!$task->isDone());
+        $task->setIsDone(!$task->getIsDone());
         $this->getDoctrine()->getManager()->flush();
 
-        $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
-
+        if($task->getIsDone())
+        {
+            $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
+        }else {
+            $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme non terminée.', $task->getTitle()));
+        }
         return $this->redirectToRoute('task_list');
     }
 
@@ -87,7 +99,7 @@ class TaskController extends AbstractController
         $em->remove($task);
         $em->flush();
 
-        $this->addFlash('success', 'La tâche a bien été supprimée.');
+        $this->addFlash('delete', 'La tâche a bien été supprimée.');
 
         return $this->redirectToRoute('task_list');
     }

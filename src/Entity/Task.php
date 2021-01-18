@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TaskRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=TaskRepository::class)
@@ -28,17 +29,18 @@ class Task
     private $content;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean",nullable=true,options={"default"=0})
      */
     private $isDone;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @Assert\DateTime()
+     * @ORM\Column(type="datetime",nullable=true)
      */
     private $createdAt;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tasks")
      */
     private $user;
 
