@@ -43,32 +43,4 @@ class SecurityController extends AbstractController
     {
         // This code is never executed.
     }
-
-    /**
-     * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param GuardAuthenticatorHandler $guardHandler
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/register", name="register")
-     */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder,EntityManagerInterface $entityManager)
-    {
-        $form = $this->createForm(UserRegistrationType::class);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user = $form->getData();
-            $user->setRoles(['ROLE_USER']);
-            $user->setPassword($passwordEncoder->encodePassword(
-                $user,
-                $user->getPassword()
-            ));
-
-            $entityManager->persist($user);
-
-            $entityManager->flush();
-        }
-        return $this->render('security/register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
-    }
 }
