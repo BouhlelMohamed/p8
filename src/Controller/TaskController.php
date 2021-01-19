@@ -8,15 +8,32 @@ use App\Repository\UserRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\TaskRepository;
 
 class TaskController extends AbstractController
 {
     /**
      * @Route("/tasks", name="task_list")
      */
-    public function listAction()
+    public function listAction(TaskRepository $taskRepository)
     {
-        return $this->render('task/list.html.twig', ['tasks' => $this->getDoctrine()->getRepository('App:Task')->findAll()]);
+        return $this->render('task/list.html.twig', ['tasks' => $taskRepository->findAll()]);
+    }
+
+    /**
+     * @Route("/tasks/valid", name="task_list_valid")
+     */
+    public function listValidAction(TaskRepository $taskRepository)
+    {
+        return $this->render('task/list.valid.html.twig', ['tasks' => $taskRepository->findAllCheckValidate(1) ]);
+    }
+
+    /**
+     * @Route("/tasks/notvalid", name="task_list_not_valid")
+     */
+    public function listNotValidAction(TaskRepository $taskRepository)
+    {
+        return $this->render('task/list.notvalid.html.twig', ['tasks' => $taskRepository->findAllCheckValidate(0) ]);
     }
 
     /**

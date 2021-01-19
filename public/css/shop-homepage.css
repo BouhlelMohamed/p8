@@ -53,6 +53,9 @@
 .cursor-pointer {
     cursor: pointer;
 }
+.task-list a {
+    margin-right: 10px!important;
+}
 .form-button {
     display: flex;
     justify-content: end;
