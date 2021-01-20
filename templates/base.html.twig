@@ -36,11 +36,12 @@
         <div class="navbar-homepage-item">
             <form class="form-inline nav-link-color">
                 <a href="{{ path('homepage') }}">Accueil  </a>
-                <a href="{{ path('task_list') }}">Tâches  </a>
-                <a href="{{ path('user_list') }}">Utilisateurs  </a>
-                {% if app.user %}
+                    <a href="{{ path('task_list') }}">Tâches  </a>
+                {% if app.user and is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('user_list') }}">Utilisateurs  </a>
                     <a href="{{ path('user_create') }}">Créer un utilisateur</a>
-
+                {% endif %}
+                {% if app.user %}
                     <a href="{{ path('logout') }}">  Se déconnecter</a>
                 {% endif %}
             </form>

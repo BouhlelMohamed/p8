@@ -29,7 +29,7 @@
                         {% endif %}
                         </button>
                     </form>
-                    {% if task.user == app.user %}
+                    {% if (task.user == app.user) or (is_granted('ROLE_ADMIN')) %}
                         <form action="{{ path('task_delete', {'id' : task.id }) }}" class="cursor-pointer">
                             <button>
                                 <img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMnB0IiB2aWV3Qm94PSItNjQgMCA1MTIgNTEyIiB3aWR0aD0iNTEycHQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0ibTI1NiA4MGgtMzJ2LTQ4aC02NHY0OGgtMzJ2LTgwaDEyOHptMCAwIiBmaWxsPSIjNjI4MDhjIi8+PHBhdGggZD0ibTMwNCA1MTJoLTIyNGMtMjYuNTA3ODEyIDAtNDgtMjEuNDkyMTg4LTQ4LTQ4di0zMzZoMzIwdjMzNmMwIDI2LjUwNzgxMi0yMS40OTIxODggNDgtNDggNDh6bTAgMCIgZmlsbD0iI2U3NmU1NCIvPjxwYXRoIGQ9Im0zODQgMTYwaC0zODR2LTY0YzAtMTcuNjcxODc1IDE0LjMyODEyNS0zMiAzMi0zMmgzMjBjMTcuNjcxODc1IDAgMzIgMTQuMzI4MTI1IDMyIDMyem0wIDAiIGZpbGw9IiM3Nzk1OWUiLz48cGF0aCBkPSJtMjYwIDI2MGMtNi4yNDYwOTQtNi4yNDYwOTQtMTYuMzc1LTYuMjQ2MDk0LTIyLjYyNSAwbC00MS4zNzUgNDEuMzc1LTQxLjM3NS00MS4zNzVjLTYuMjUtNi4yNDYwOTQtMTYuMzc4OTA2LTYuMjQ2MDk0LTIyLjYyNSAwcy02LjI0NjA5NCAxNi4zNzUgMCAyMi42MjVsNDEuMzc1IDQxLjM3NS00MS4zNzUgNDEuMzc1Yy02LjI0NjA5NCA2LjI1LTYuMjQ2MDk0IDE2LjM3ODkwNiAwIDIyLjYyNXMxNi4zNzUgNi4yNDYwOTQgMjIuNjI1IDBsNDEuMzc1LTQxLjM3NSA0MS4zNzUgNDEuMzc1YzYuMjUgNi4yNDYwOTQgMTYuMzc4OTA2IDYuMjQ2MDk0IDIyLjYyNSAwczYuMjQ2MDk0LTE2LjM3NSAwLTIyLjYyNWwtNDEuMzc1LTQxLjM3NSA0MS4zNzUtNDEuMzc1YzYuMjQ2MDk0LTYuMjUgNi4yNDYwOTQtMTYuMzc4OTA2IDAtMjIuNjI1em0wIDAiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" />

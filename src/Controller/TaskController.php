@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\UserRepository;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\TaskRepository;
+use Symfony\Component\Security\Core\Security;
 
 class TaskController extends AbstractController
 {
@@ -110,8 +112,14 @@ class TaskController extends AbstractController
     /**
      * @Route("/tasks/{id}/delete", name="task_delete")
      */
-    public function deleteTaskAction(Task $task)
+    public function deleteTaskAction(Task $task,Security $security)
     {
+        $user = $security->getUser();
+
+        if($security->isGranted("ROLE_ADMIN") === false && $user->getId() !== $task->getUser()->getId()){
+            throw new AccessDeniedHttpException("Vous n'avez pas le droit d'accéder à cette ressource");
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($task);
         $em->flush();
