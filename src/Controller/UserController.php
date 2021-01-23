@@ -38,6 +38,7 @@ class UserController extends AbstractController
             $password = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
 
+            $user->setRoles([$request->request->all()['user']['roles']]);
             $em->persist($user);
             $em->flush();
 
@@ -55,10 +56,9 @@ class UserController extends AbstractController
     public function editAction(User $user, Request $request,EntityManagerInterface $em)
     {
         $form = $this->createForm(EditUserType::class, $user);
-        $passwordPorm = $this->createForm(EditPasswordUserType::class, $user);
+        $passwordForm = $this->createForm(EditPasswordUserType::class, $user);
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
 
@@ -67,7 +67,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_list');
         }
 
-        return $this->render('user/edit.html.twig', ['form' => $form->createView(),'passwordForm' => $passwordPorm->createView(), 'user' => $user]);
+        return $this->render('user/edit.html.twig', ['form' => $form->createView(),'passwordForm' => $passwordForm->createView(), 'user' => $user]);
     }
 
     /**

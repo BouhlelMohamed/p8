@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Tests\Unit\Entity;
+namespace App\Tests\Unit;
 
 use App\Entity\Task;
-use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use App\Entity\User;
 
@@ -65,7 +65,7 @@ class TaskTest extends TestCase
      */
     public function getAndSetCreatedAt()
     {
-        $datetime = new DateTime('2020-10-10 00:00:00');
+        $datetime = new DateTimeImmutable('2020-10-10 00:00:00');
         $this->assertEquals(null, $this->task->getCreatedAt());
         $this->task->setCreatedAt($datetime);
         $this->assertEquals($datetime, $this->task->getCreatedAt());
