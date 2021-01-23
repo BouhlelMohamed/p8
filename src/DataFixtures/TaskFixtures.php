@@ -27,6 +27,7 @@ class TaskFixtures extends Fixture implements DependentFixtureInterface
                 ->setContent(
                     'Content' . $i . ' Lorem :).'
                 )
+                ->setIsDone(rand(0,1))
                 ->setCreatedAt(new \DateTimeImmutable())
             ;
             $task->setUser($users[rand(0,3)]);

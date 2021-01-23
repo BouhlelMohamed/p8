@@ -5,8 +5,7 @@ namespace App\Tests\Functional\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Tests\FakeDataTrait\FakeData;
 use App\Tests\FakeDataTrait\TruncateDB;
-use App\Tests\FakeDataTrait\Connection
-    ;
+use App\Tests\FakeDataTrait\Connection;
 use App\Entity\User;
 use App\Entity\Task;
 use App\Repository\UserRepository;

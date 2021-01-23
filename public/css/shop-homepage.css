@@ -45,7 +45,14 @@
 .caption h4 {
     white-space: nowrap;
 }
-
+.btn-list-task {
+    display: flex;
+    justify-content: space-between;
+}
+.btn-update-task{
+    display: flex;
+    align-items: center;
+}
 .thumbnail img {
     width: 100%;
     height: 40px;
