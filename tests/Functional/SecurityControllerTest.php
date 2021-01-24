@@ -31,7 +31,14 @@ class SecurityControllerTest extends WebTestCase
         static::assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 
-    public function testLoginWithWrongCredidentials()
+
+//    public function testCheckLogin()
+//    {
+//        $this->client->request('GET', '/login_check');
+//        static::assertSame(200, $this->client->getResponse()->getStatusCode());
+//    }
+
+    public function testLoginWithNotValidData()
     {
         $crawler = $this->client->request('GET', '/login');
         static::assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -56,10 +63,15 @@ class SecurityControllerTest extends WebTestCase
      */
     public function testLogout(): void
     {
-        $this->client->request('GET', '/logout');
+        $crawler = $this->client->request('GET', '/');
 
-        $this->assertTrue($this->client->getResponse()->isRedirection());
-        $this->client->followRedirect();
+        $link =  $crawler->filter('a.logout-button')
+            ->link()
+        ;
+        
+        $this->client->click($link);
+        static::assertSame(302, $this->client->getResponse()->getStatusCode());
+
     }
 
     /**
