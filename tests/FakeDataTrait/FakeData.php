@@ -17,7 +17,12 @@ trait FakeData{
             ->setPassword(
                 '$2y$13$Q550MpE6pPh10MAfHD.16ugtsEq.3i4aMaMCtI2fUmpWItWV.7phS'
             )
-            ->setRoles(['ROLE_ADMIN']);
+                ->setRoles(['ROLE_ADMIN']);
+
+            if($i === 0)
+            {
+                $user->setRoles(['ROLE_USER']);
+            }
 
             $entityManager->persist($user);
         }

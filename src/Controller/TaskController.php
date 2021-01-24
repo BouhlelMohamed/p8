@@ -95,7 +95,7 @@ class TaskController extends AbstractController
     /**
      * @Route("/tasks/{id}/toggle", name="task_toggle",methods={"GET"})
      */
-    public function toggleTaskAction(Task $task,Request $request)
+    public function toggleTaskAction(Task $task,Request $request,$id)
     {
         $task->setIsDone(!$task->getIsDone());
         $this->getDoctrine()->getManager()->flush();

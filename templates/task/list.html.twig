@@ -23,7 +23,7 @@
                     <a class="btn btn-primary btn-update-task" href="{{ path('task_edit', {'id' : task.id }) }}">Modifier</a>
                     <div class="form-button">
                         <form action="{{ path('task_toggle', {'id' : task.id }) }}" class="cursor-pointer">
-                            <button>
+                            <button class="validate-data">
                             {% if not task.isDone %}
                                 <img src="https://img.icons8.com/color/48/000000/approval--v3.png"/>
                             {% else %}
