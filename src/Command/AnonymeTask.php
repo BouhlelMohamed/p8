@@ -12,6 +12,11 @@ use App\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Repository\UserRepository;
 
+/**
+ * @codeCoverageIgnore
+ * Class AnonymeTask
+ * @package App\Command
+ */
 class AnonymeTask extends Command
 {
     // the name of the command (the part after "bin/console")

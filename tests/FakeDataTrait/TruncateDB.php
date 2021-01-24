@@ -3,7 +3,11 @@
 
 namespace App\Tests\FakeDataTrait;
 
-
+/**
+ * @codeCoverageIgnore
+ * Trait TruncateDB
+ * @package App\Tests\FakeDataTrait
+ */
 trait TruncateDB
 {
 

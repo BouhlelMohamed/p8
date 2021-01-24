@@ -9,7 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\User;
 
 /**
- * Class TaskFixtures.
+ * @codeCoverageIgnore
  */
 class TaskFixtures extends Fixture implements DependentFixtureInterface
 {

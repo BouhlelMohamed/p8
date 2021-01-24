@@ -72,6 +72,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/users/{id}/editPassword", name="user_edit_password")
+     *
      */
     public function editPasswordAction(User $user, Request $request,UserPasswordEncoderInterface $encoder,EntityManagerInterface $em)
     {
@@ -87,7 +88,6 @@ class UserController extends AbstractController
 
             $this->addFlash('success', "Le mot de passe a bien été modifié");
 
-            return $this->redirectToRoute('user_list');
         }
         return $this->redirectToRoute('user_list');
     }

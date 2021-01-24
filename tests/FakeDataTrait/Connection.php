@@ -4,6 +4,11 @@ namespace App\Tests\FakeDataTrait;
 use App\Entity\User;
 use App\Entity\Task;
 
+/**
+ * @codeCoverageIgnore
+ * Trait Connection
+ * @package App\Tests\FakeDataTrait
+ */
 trait Connection
 {
     public function loginUser($client,$username='user1',$password='password')

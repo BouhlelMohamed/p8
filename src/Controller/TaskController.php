@@ -51,10 +51,7 @@ class TaskController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $task->setUser($this->getUser());
-            if(!$this->getUser())
-            {
-                $task->setUser($userRepository->findOneByUsername('anonyme'));
-            }
+
             $task->setCreatedAt(new \DateTimeImmutable());
             $em = $this->getDoctrine()->getManager();
 

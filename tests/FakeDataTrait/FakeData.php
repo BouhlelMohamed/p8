@@ -5,6 +5,11 @@ use App\Entity\User;
 use App\Entity\Task;
 use Doctrine\ORM\EntityManagerInterface;
 
+/**
+ * @codeCoverageIgnore
+ * Trait FakeData
+ * @package App\Tests\FakeDataTrait
+ */
 trait FakeData{
 
     public function addFakeDataUser(EntityManagerInterface $entityManager)

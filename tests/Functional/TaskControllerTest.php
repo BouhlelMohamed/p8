@@ -160,11 +160,6 @@ class TaskControllerTest extends WebTestCase
                 'La tâche '.$randomTask->getTitle().' a bien été marquée comme faite.',
                 current($flashes['success'])
             );
-        }else {
-            $this->assertEquals(
-                'La tâche '.$randomTask->getTitle().' a bien été marquée comme non terminée..',
-                current($flashes['success'])
-            );
         }
 
         $this->client->followRedirect();
@@ -172,6 +167,32 @@ class TaskControllerTest extends WebTestCase
         // after
         static::assertCount(1,$this->entityManager->getRepository(Task::class)->findAllCheckValidate(1));
         static::assertCount(3,$this->entityManager->getRepository(Task::class)->findAllCheckValidate(0));
+
+        $this->client->request(
+            'GET',
+            '/tasks/'.$randomTask->getId().'/toggle'
+        );
+        static::assertSame(302, $this->client->getResponse()->getStatusCode());
+
+        $session = $this->client->getContainer()->get('session');
+        $flashes = $session->getBag('flashes')->all();
+        $this->assertArrayHasKey('success', $flashes);
+        $this->assertCount(1, $flashes['success']);
+
+        if(!$randomTask->getIsDone())
+        {
+            $this->assertEquals(
+                'La tâche '.$randomTask->getTitle().' a bien été marquée comme non terminée.',
+                current($flashes['success'])
+            );
+        }
+
+        $this->client->followRedirect();
+        static::assertSame(200, $this->client->getResponse()->getStatusCode());
+        // after
+        static::assertCount(0,$this->entityManager->getRepository(Task::class)->findAllCheckValidate(1));
+        static::assertCount(4,$this->entityManager->getRepository(Task::class)->findAllCheckValidate(0));
+
     }
 
     public function testGetTaskWhereItemDontExists()
