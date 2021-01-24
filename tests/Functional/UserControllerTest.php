@@ -49,7 +49,7 @@ class UserControllerTest extends WebTestCase
     /**
      * @return void
      */
-    public function testShowUsers(): void
+    public function testShowListUsers(): void
     {
         $this->client->request(
             'GET',
@@ -60,5 +60,124 @@ class UserControllerTest extends WebTestCase
             200,
             $this->client->getResponse()->getStatusCode()
         );
+    }
+
+
+    /**
+     * Test create User.
+     *
+     * @return void
+     */
+    public function testCreateUser(): void
+    {
+        $crawler = $this->client->request(
+            'GET',
+            '/users/create'
+        );
+
+        $form = $crawler->selectButton('Ajouter')->form();
+        $form['user[username]'] = 'userTest';
+        $form['user[password][first]'] = 'password';
+        $form['user[password][second]'] = 'password';
+        $form['user[email]'] = 'userTest@test.com';
+        $this->client->submit($form);
+
+        $session = $this->client->getContainer()->get('session');
+        $flashes = $session->getBag('flashes')->all();
+        $this->assertArrayHasKey('success', $flashes);
+        $this->assertCount(1, $flashes['success']);
+        $this->assertEquals(
+            "L'utilisateur a bien été ajouté.",
+            current($flashes['success'])
+        );
+
+        $this->client->followRedirect();
+
+        $this->assertEquals(
+            200,
+            $this->client->getResponse()->getStatusCode()
+        );
+
+        $user = $this->entityManager
+            ->getRepository(User::class)
+            ->findOneBy(['username' => 'userTest']);
+    }
+
+
+    /**
+     * @return void
+     */
+    public function testUpdateUser(): void
+    {
+        $user = $this->entityManager
+            ->getRepository(User::class)
+            ->findOneBy(['username' => 'user0']);
+        $crawler = $this->client->request(
+            'GET',
+            '/users/'.$user->getId().'/edit'
+        );
+
+        $form = $crawler->selectButton('Modifier')->form();
+        $form['edit_user[email]'] = 'user@user.com';
+        $this->client->submit($form);
+
+        $session = $this->client->getContainer()->get('session');
+        $flashes = $session->getBag('flashes')->all();
+        $this->assertArrayHasKey('success', $flashes);
+        $this->assertCount(1, $flashes['success']);
+        $this->assertEquals(
+            "L'utilisateur a bien été modifié",
+            current($flashes['success'])
+        );
+
+        $this->client->followRedirect();
+
+        $user = $this->entityManager
+            ->getRepository(User::class)
+            ->findOneBy(['email' => 'user@user.com']);
+
+        $this->assertCount(1, [$user]);
+    }
+
+    /**
+     * @return void
+     */
+    public function testUpdatePassword(): void
+    {
+        $user = $this->entityManager
+            ->getRepository(User::class)
+            ->findOneBy(['username' => 'user0']);
+        $crawler = $this->client->request(
+            'GET',
+            '/users/'.$user->getId().'/edit'
+        );
+
+        $form = $crawler->selectButton('Modifier le mot de passe')->form();
+        $form['edit_password_user[password][first]'] = 'user@user.com';
+        $form['edit_password_user[password][second]'] = 'user@user.com';
+        $this->client->submit($form);
+
+        $session = $this->client->getContainer()->get('session');
+        $flashes = $session->getBag('flashes')->all();
+        $this->assertArrayHasKey('success', $flashes);
+        $this->assertCount(1, $flashes['success']);
+        $this->assertEquals(
+            "Le mot de passe a bien été modifié",
+            current($flashes['success'])
+        );
+
+        $this->client->followRedirect();
+        static::assertSame(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * @return void
+     */
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->entityManager->close();
+        $this->entityManager = null;
     }
 }
