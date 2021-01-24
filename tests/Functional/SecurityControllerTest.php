@@ -12,78 +12,72 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class SecurityControllerTest extends WebTestCase
 {
+    use FakeData,TruncateDB,Connection;
+
     public function testLogin()
     {
-        $client = static::createClient();
+        $crawler = $this->client->request('GET', '/login');
+        static::assertSame(200, $this->client->getResponse()->getStatusCode());
 
-        $crawler = $client->request('GET', '/login');
-        static::assertSame(200, $client->getResponse()->getStatusCode());
-
-        // Test if login field exists
         static::assertSame(1, $crawler->filter('input[name="_username"]')->count());
         static::assertSame(1, $crawler->filter('input[name="_password"]')->count());
 
         $form = $crawler->selectButton('Se connecter')->form();
         $form['_username'] = 'user';
         $form['_password'] = 'test';
-        $client->submit($form);
+        $this->client->submit($form);
 
-        $crawler = $client->followRedirect();
-        static::assertSame(200, $client->getResponse()->getStatusCode());
-
-        // Test if home page text when authenticated exists
-        static::assertSame("Bienvenue sur Todo List, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !", $crawler->filter('h1')->text());
-
-        // Return the client to reuse the authenticated user it in others functionnal tests
-        return $client;
-    }
-
-    public function testLoginAsAdmin()
-    {
-        $client = static::createClient();
-
-        $crawler = $client->request('GET', '/login');
-        static::assertSame(200, $client->getResponse()->getStatusCode());
-
-        // Test if login field exists
-        static::assertSame(1, $crawler->filter('input[name="_username"]')->count());
-        static::assertSame(1, $crawler->filter('input[name="_password"]')->count());
-
-        $form = $crawler->selectButton('Se connecter')->form();
-        $form['_username'] = 'admin';
-        $form['_password'] = 'test';
-        $client->submit($form);
-
-        $crawler = $client->followRedirect();
-        static::assertSame(200, $client->getResponse()->getStatusCode());
-
-        // Test if home page text when authenticated exists
-        static::assertSame("Bienvenue sur Todo List, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !", $crawler->filter('h1')->text());
-
-        // Return the client to reuse the authenticated user admin it in others functionnal tests
-        return $client;
+        $crawler = $this->client->followRedirect();
+        static::assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 
     public function testLoginWithWrongCredidentials()
     {
-        $client = static::createClient();
+        $crawler = $this->client->request('GET', '/login');
+        static::assertSame(200, $this->client->getResponse()->getStatusCode());
 
-        $crawler = $client->request('GET', '/login');
-        static::assertSame(200, $client->getResponse()->getStatusCode());
-
-        // Test if login field exists
         static::assertSame(1, $crawler->filter('input[name="_username"]')->count());
         static::assertSame(1, $crawler->filter('input[name="_password"]')->count());
 
         $form = $crawler->selectButton('Se connecter')->form();
         $form['_username'] = 'user';
-        $form['_password'] = 'WrongPassword';
-        $client->submit($form);
+        $form['_password'] = 'TestNimporteQuoi';
+        $this->client->submit($form);
 
-        $crawler = $client->followRedirect();
-        static::assertSame(200, $client->getResponse()->getStatusCode());
+        $crawler = $this->client->followRedirect();
+        static::assertSame(200, $this->client->getResponse()->getStatusCode());
 
-        // Test if error message is displayed
         static::assertSame("Invalid credentials.", $crawler->filter('div.alert.alert-danger')->text());
+    }
+
+
+    /**
+     * @return void
+     */
+    public function testLogout(): void
+    {
+        $this->client->request('GET', '/logout');
+
+        $this->assertTrue($this->client->getResponse()->isRedirection());
+        $this->client->followRedirect();
+    }
+
+    /**
+     * @return void
+     */
+    protected function setUp(): void
+    {
+        $this->client = $this->createClient(['environment' => 'test']);
+        $this->entityManager = $this->client->getContainer()
+            ->get('doctrine')
+            ->getManager();
+        $this->client = $this->loginUser($this->client);
+
+        $this->truncateEntities([
+            Task::class,
+            User::class,
+        ]);
+
+        $this->addFakeDataUser($this->entityManager);
     }
 }
