@@ -68,7 +68,7 @@ class SecurityControllerTest extends WebTestCase
         $link =  $crawler->filter('a.logout-button')
             ->link()
         ;
-        
+
         $this->client->click($link);
         static::assertSame(302, $this->client->getResponse()->getStatusCode());
 

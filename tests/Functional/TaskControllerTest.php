@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Tests\Functional;
 
 use App\Entity\Task;
