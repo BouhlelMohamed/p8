@@ -45,7 +45,7 @@ class TaskControllerTest extends WebTestCase
         $this->addFakeDataTask($this->entityManager);
         $this->tasks = $this->entityManager->getRepository(Task::class)->findAll();
     }
-
+    
     /**
      * @return void
      */
