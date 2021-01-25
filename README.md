@@ -2,29 +2,30 @@
 
 Pour télécharger le projet :
 
-<div class="highlight highlight-source-shell"><pre>1 - Cloner le projet</pre></div>
+<div class="highlight highlight-source-shell"><pre>1 - Cloner le projet :</pre></div>
 
 git clone https://github.com/BouhlelMohamed/p8
 
-  2 -    Installer les packages 
+<div class="highlight highlight-source-shell"><pre>2 - Installer les packages :</pre></div>
 
 composer install
 
-3 - Modifier le fichier .env avec les informations de votre bdd :
+<div class="highlight highlight-source-shell"><pre>3 - Modifier le fichier .env avec les informations de votre bdd : </pre></div>
 
 DATABASE_URL=mysql: //db_user:db_password@127.0.0.1:3306/db_name
 
- 4 -   Création de la base de données
+<div class="highlight highlight-source-shell"><pre>4 - Création de la base de données : </pre></div>
 
 symfony serve doctrine:database:create
 
- 5 -   Ajouter les tables et les colonnes dans votre bdd :
+<div class="highlight highlight-source-shell"><pre>5 - Ajouter les tables et les colonnes dans votre bdd : </pre></div>
 
 symfony serve doctrine:migrations:migrate
 
- 6 - Ajouter des fausses données :  (Ce n'est pas obligatoire)
- 
+<div class="highlight highlight-source-shell"><pre>6 - Ajouter des fausses données :  (Ce n'est pas obligatoire)</pre></div>
+
 symfony serve doctrine:fixtures:load
  
- 7 - Lancer les tests : 
+ <div class="highlight highlight-source-shell"><pre>7 - Lancer les tests : </pre></div>
+
 php bin/phpunit
