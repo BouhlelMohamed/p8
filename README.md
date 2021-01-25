@@ -37,11 +37,11 @@ php bin/phpunit
 Pour bien commencer , suivez les étapes suivantes:
 
     1 - Cliquer sur Fork le projet tout en haut à droite.
-    2 - Vérifier s'il existe des issues ouverte
+    2 - Vérifier s'il existe des issues ouvertes
     3 - Créer une nouvelle branche avec le prefix < contrib: > et commencer à travailler dessus.
     3 - Ajouter la branche sur le fork .
     4 - Respecter les normes PSR vous pouvez en savoir plus ici <a href="https://www.php-fig.org/psr/">PSR</a>
-    5 - Vérifier que l'ensemble des tests passent a 100%
+    5 - Vérifier que l'ensemble des tests sont ok.
     6 - Créer une nouvelle pull-request 
 
 Merci :)
