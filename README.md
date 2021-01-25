@@ -2,7 +2,7 @@
 
 Pour télécharger le projet :
 
-<i>  1 -  Cloner le projet </i>
+<div class="highlight highlight-source-shell"><pre>1 - Cloner le projet</pre></div>
 
 git clone https://github.com/BouhlelMohamed/p8
 
