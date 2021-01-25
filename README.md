@@ -1,4 +1,4 @@
-<h1>Projet 8 : Améliorez une application existante de ToDo & Co</h1>
+<h1>Projet 8 : Améliorez une application existante de ToDo & Co</h1>  
 
 Pour télécharger le projet :
 
