@@ -1,4 +1,6 @@
-<h1>Projet 8 : Améliorez une application existante de ToDo & Co : http://p8.mohamed-bouhlel.com/login</h1>  
+<h1>Projet 8 : Améliorez une application existante de ToDo & Co :</h1>  
+
+Lien : http://p8.mohamed-bouhlel.com/login
 
 Pour télécharger le projet :
 
