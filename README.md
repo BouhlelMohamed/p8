@@ -2,7 +2,7 @@
 
 Pour télécharger le projet :
 
-  1 -  Cloner le projet 
+<i>  1 -  Cloner le projet </i>
 
 git clone https://github.com/BouhlelMohamed/p8
 
