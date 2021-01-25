@@ -29,3 +29,14 @@ symfony serve doctrine:fixtures:load
  <div class="highlight highlight-source-shell"><pre>7 - Lancer les tests : </pre></div>
 
 php bin/phpunit
+
+
+<hr>
+<h1>Comment contribuer au projet :</h1>
+
+Pour bien commencer , suivez les étapes suivantes:
+
+    1 - Cliquer sur Fork le projet tout en haut à droite.
+    2 - Créer une nouvelle branche avec le prefix < contrib: > et commencer à travailler dessus.
+    3 - Ajouter la branche sur le fork .
+    4 - Créer une nouvelle pull-request 
