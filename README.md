@@ -1,4 +1,4 @@
-<h1>Projet 8 : Améliorez une application existante de ToDo & Co</h1>  
+<h1>Projet 8 : Améliorez une application existante de ToDo & Co : http://p8.mohamed-bouhlel.com/login</h1>  
 
 Pour télécharger le projet :
 
@@ -40,7 +40,7 @@ Pour bien commencer , suivez les étapes suivantes:
     2 - Vérifier s'il existe des issues ouvertes
     3 - Créer une nouvelle branche avec le prefix < contrib: > et commencer à travailler dessus.
     3 - Ajouter la branche sur le fork .
-    4 - Respecter les normes PSR vous pouvez en savoir plus ici <a href="https://www.php-fig.org/psr/">PSR</a>
+    4 - Respecter les normes PSR vous pouvez en savoir plus ici https://www.php-fig.org/psr/
     5 - Vérifier que l'ensemble des tests sont ok.
     6 - Créer une nouvelle pull-request 
 
