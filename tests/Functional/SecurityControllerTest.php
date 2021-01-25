@@ -31,13 +31,6 @@ class SecurityControllerTest extends WebTestCase
         static::assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 
-
-//    public function testCheckLogin()
-//    {
-//        $this->client->request('GET', '/login_check');
-//        static::assertSame(200, $this->client->getResponse()->getStatusCode());
-//    }
-
     public function testLoginWithNotValidData()
     {
         $crawler = $this->client->request('GET', '/login');

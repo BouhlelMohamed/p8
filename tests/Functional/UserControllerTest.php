@@ -97,10 +97,6 @@ class UserControllerTest extends WebTestCase
             200,
             $this->client->getResponse()->getStatusCode()
         );
-
-        $user = $this->entityManager
-            ->getRepository(User::class)
-            ->findOneBy(['username' => 'userTest']);
     }
 
 
