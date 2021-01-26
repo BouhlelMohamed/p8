@@ -40,8 +40,6 @@ security:
         - { path: ^/users, roles: ROLE_ADMIN }
         - { path: ^/, roles: ROLE_USER }
 
-          #- { path: ^/, roles: ROLE_USER }
-
 
 
 
