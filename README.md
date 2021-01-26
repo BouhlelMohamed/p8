@@ -1,3 +1,6 @@
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/97300c9ddf814adfaf9f2ed6143ae1a8)](https://app.codacy.com/gh/BouhlelMohamed/p8?utm_source=github.com&utm_medium=referral&utm_content=BouhlelMohamed/p8&utm_campaign=Badge_Grade)
+
 <h1>Projet 8 : Améliorez une application existante de ToDo & Co :</h1>  
 
 Lien : http://p8.mohamed-bouhlel.com/login
