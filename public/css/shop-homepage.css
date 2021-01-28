@@ -12,7 +12,10 @@
     display: flex;
     justify-content: center;
 }
-
+.validate-data {
+    display: flex;
+    justify-content: flex-end;
+}
 .navbar-homepage {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -69,9 +72,11 @@
 }
 .form-button {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
+
 .form-button button{
+    width: 6rem;
     background: transparent;
 }
 .ratings {
